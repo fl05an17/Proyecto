@@ -1,0 +1,112 @@
+﻿
+
+@{
+    ViewData["Title"] = "Horarios";
+}
+<div>
+    <h2><img src="~/images/Horario.png" alt="Visual Studio" class="img-responsive" />Horarios</h2>
+    Estos son los horarios del gimnasio.
+</div>
+
+<p>
+    <a data-toggle='modal' onclick="restablecer();" data-target='#modalCS' class='btn btn-info'>Agregar horario</a>
+</p>
+<div class="form-group">
+    <div class="col-md-6">
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarHorario(1,'dia');" class="form-control" />
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="#" onclick='filtrarHorario(1,"actividad")'>Nombre de la actividad</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarHorario(1,"dia")'>Dia</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarHorario(1,"hora")'>Hora</a>
+            </th>
+            <th>
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="resultSearch"></tbody>
+</table>
+<div id="paginado">
+
+</div>
+<div class="modal fade" id="modalCS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar horario</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Dia" class="col-md-2 control-label">Día</label>
+                            <div class="col-md-10">
+                                <input for="Dia" id="Dia" placeholder="Dia" name="Dia" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Hora" class="col-md-2 control-label">Hora</label>
+                            <div class="col-md-10">
+                                <input for="Hora" id="Hora" placeholder="Hora" name="Hora" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Actividad" class="col-md-2 control-label">Nombre de la actividad</label>
+                            <div class="col-md-10">
+                                <select id='ActividadHorarios' class="form-control"></select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <label id="mensaje" class="col-md-2 control-label"></label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="agregarHorario()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalHorario" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar estado</h4>
+            </div>
+            <div class="modal-body">
+                <h3 id="titleHorario" class="modal-title"></h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="editarHorario1()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="ModalDeleteCS" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar horario</h4>
+            </div>
+            <div class="modal-body">
+                <h3 id="titleCurso" class="modal-title"></h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="deleteHorarios()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

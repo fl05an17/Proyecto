@@ -1,0 +1,49 @@
+@model TwoFactorAuthenticationViewModel
+@{
+    ViewData["Title"] = "Autenticaion de doble factor";
+    ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
+}
+
+<h4>@ViewData["Title"]</h4>
+@if (Model.Is2faEnabled)
+{
+    if (Model.RecoveryCodesLeft == 0)
+    {
+        <div class="alert alert-danger">
+            <strong>No te quedan códigos de recuperación.</strong>
+            <p>Debes <a asp-action="GenerateRecoveryCodes">genere un nuevo conjunto de códigos de recuperación</a> antes de iniciar sesión con un código de recuperación.</p>
+        </div>
+    }
+    else if (Model.RecoveryCodesLeft == 1)
+    {
+        <div class="alert alert-danger">
+            <strong>Te queda 1 código de recuperación.</strong>
+            <p>Usted puede <a asp-action="GenerateRecoveryCodes">generar un nuevo conjunto de códigos de recuperación</a>.</p>
+        </div>
+    }
+    else if (Model.RecoveryCodesLeft <= 3)
+    {
+        <div class="alert alert-warning">
+            <strong>Tienes @Model.RecoveryCodesLeft códigos de recuperación dejados.</strong>
+            <p>Debieras <a asp-action="GenerateRecoveryCodes">generar un nuevo conjunto de códigos de recuperación</a>.</p>
+        </div>
+    }
+
+    <a asp-action="Disable2faWarning" class="btn btn-default">Inhabilitar 2FA</a>
+    <a asp-action="GenerateRecoveryCodesWarning" class="btn btn-default">Restablecer códigos de recuperación</a>
+}
+
+<h5>App autenticadora</h5>
+@if (!Model.HasAuthenticator)
+{
+    <a asp-action="EnableAuthenticator" class="btn btn-default">Agregar app autenticadora</a>
+}
+else
+{
+    <a asp-action="EnableAuthenticator" class="btn btn-default">Configurar app autenticadora</a>
+    <a asp-action="ResetAuthenticatorWarning" class="btn btn-default">Resetear clave autenticadora</a>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

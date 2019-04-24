@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Actividades";
+}
+<div>
+    <h2><img src="~/images/Actividad.png"/>          Actividades</h2>
+    Estas son las actividades que te brindamos como gimnasio. Ten en cuenta el estado de la actividad ademas de consultar
+    en los demas apartados sus horarios, y tarifas.
+</div>
+
+<p>
+    <a data-toggle='modal' data-target='#modalAC' class='btn btn-info'>Agregar actividad</a>
+</p>
+<div class="form-group">
+    <div class="col-md-6">
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onkeyup="filtrarDatos(1, 'nombre');" class="form-control" />
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="#" onclick='filtrarDatos(1, "nombre")'>Nombre de la actividad</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarDatos(1, "des")'>Descripcion</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarDatos(1, "can")'>Cantidad de inscritos</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarDatos(1, "estado")'>Estado</a>
+            </th>
+            <th>
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="resultSearch"></tbody>
+</table>
+<div id="paginado">
+
+</div>
+<div class="modal fade" id="modalAC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar actividad</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Nombre" class="col-md-2 control-label">Nombre dela actividad</label>
+                            <div class="col-md-10">
+                                <input form="Nombre" id="Nombre" placeholder="Nombre" name="Nombre" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Cantidad" class="col-md-2 control-label">Cantidad de inscritos</label>
+                            <div class="col-md-10">
+                                <input form="Cantidad" id="Cantidad" placeholder="Cantidad" name="Cantidad" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Descripcion" class="col-md-2 control-label">Descripcion</label>
+                            <div class="col-md-10">
+                                <input form="Descripcion" id="Descripcion" placeholder="Descripcion" name="Descripcion" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="col-md-2 control-label">Estado</label>
+                            <div class="col-md-10">
+                                <select id='Estado' class="form-control">
+                                    <option value='0'>Seleccione un estado</option>
+                                    <option value='true'>Activa</option>
+                                    <option value='false'>No activa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label id="mensaje" class="col-md-5 control-label"></label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="agregarActividad()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModaEstado" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="titleActividad" class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="editarActividad()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
